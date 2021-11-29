@@ -7,15 +7,17 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float chaseRange = 5f;
+    [SerializeField] float chaseRange = 12f;
 
     NavMeshAgent navMeshAgent;
+    Animator animator;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
 
     void Start()
     {
         this.navMeshAgent = this.GetComponent<NavMeshAgent>();
+        this.animator = this.GetComponent<Animator>();
     }
 
     void Update()
@@ -43,16 +45,21 @@ public class EnemyAI : MonoBehaviour
         {
            AttackTarget();
         }
+        else
+        {
+            this.animator.SetBool("Attack", false);
+        }
     }
 
     private void ChaseTarget()
     {
+        this.animator.SetTrigger("Move");
         this.navMeshAgent.SetDestination(this.target.position);
     }
     
     private void AttackTarget()
     {
-        Debug.Log(name + " nom nom, brains");
+        this.animator.SetBool("Attack", true);
     }
 
     void OnDrawGizmosSelected() 
