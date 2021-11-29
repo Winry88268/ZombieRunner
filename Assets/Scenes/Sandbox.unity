@@ -1657,24 +1657,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 3}
   m_PrefabInstance: {fileID: 1666052907}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1924041676 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6011131921573921152, guid: 1107f36873ea4414faf3fba49d0319d8, type: 3}
-  m_PrefabInstance: {fileID: 6011131920203795020}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1924041677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924041676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d307284316b305a438ed14f763f7f1a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPoints: 100
 --- !u!1001 &1985474933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1887,14 +1869,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1796874402}
-    - target: {fileID: 6011131921573921153, guid: 1107f36873ea4414faf3fba49d0319d8, type: 3}
-      propertyPath: chaseRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6011131921573921154, guid: 1107f36873ea4414faf3fba49d0319d8, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6011131921573921182, guid: 1107f36873ea4414faf3fba49d0319d8, type: 3}
       propertyPath: m_RootOrder
       value: 3
