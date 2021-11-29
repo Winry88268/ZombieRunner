@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 284935918959791281}
   - component: {fileID: 284935918966860913}
   - component: {fileID: 284935918964873781}
+  - component: {fileID: 2637213150866406216}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -301,6 +302,18 @@ MonoBehaviour:
     slowDownRate: 20
     airControl: 0
     shellOffset: 0
+--- !u!114 &2637213150866406216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284935918954672087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6059b9df1a02f34db7b92d8d67107da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4012269807814268295
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,8 +414,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
+--- !u!1 &8417343689140527249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2337074158997199750, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
+  m_PrefabInstance: {fileID: 6106491782963215127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8417343689140960433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2337074158996965286, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
   m_PrefabInstance: {fileID: 6106491782963215127}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &8276925454197700194 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2766079011725151605, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
+  m_PrefabInstance: {fileID: 6106491782963215127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &130109109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417343689140527249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adeeb749cd08e454ebbc7687be77bbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPCamera: {fileID: 284935918955392497}
+  rayRange: 100
+  bulletDamage: 25
+  muzzleFlash: {fileID: 8276925454197700194}
+  hitEffect: {fileID: 3357287644998025111, guid: 86f0b2aeabd5f24478af1f054f643a03, type: 3}
