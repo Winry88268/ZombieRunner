@@ -25,14 +25,19 @@ public class EnemyAI : MonoBehaviour
     {
         this.distanceToTarget = Vector3.Distance(target.position, this.transform.position);
 
-        if(isProvoked)
+        if(this.isProvoked)
         {
             EngageTarget();
         }
         else if(this.distanceToTarget <= this.chaseRange)
         {
-            isProvoked = true;
+            this.isProvoked = true;
         }
+    }
+
+    public void OnDamage()
+    {
+        this.isProvoked = true;
     }
 
     private void EngageTarget()

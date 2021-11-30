@@ -14,5 +14,9 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        else
+        {
+            BroadcastMessage("OnDamage");
+        }
     }
 }
