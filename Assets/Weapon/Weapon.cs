@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] Camera FPCamera;
     [SerializeField] float rayRange = 100f;
     [SerializeField] float bulletDamage = 25f;
+
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] Camera FPCamera;
+    [SerializeField] Ammo ammoSlot;
 
     void Update()
     {
@@ -21,6 +23,8 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        if(this.ammoSlot.AmmoAmount == 0) { return; }
+
         PlayMuzzleFlash();
         ProcessRaycast();
     }
@@ -33,10 +37,12 @@ public class Weapon : MonoBehaviour
     private void ProcessRaycast()
     {
         RaycastHit hit;
+        this.ammoSlot.DecreaseAmmo();
+
         if (Physics.Raycast(this.FPCamera.transform.position,
-                        this.FPCamera.transform.forward,
-                        out hit,
-                        this.rayRange))
+                            this.FPCamera.transform.forward,
+                            out hit,
+                            this.rayRange))
         {
             CreateHitImpact(hit);
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
@@ -45,6 +51,7 @@ public class Weapon : MonoBehaviour
                 return;
             }
 
+            
             target.TakeDamage(this.bulletDamage);
         }
         else
