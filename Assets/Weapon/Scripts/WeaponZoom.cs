@@ -6,12 +6,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class WeaponZoom : MonoBehaviour
 {
-    [SerializeField] float defaultFOV = 60f;
-    [SerializeField] float zoomFOV = 25f;
-    [SerializeField] float zoomInSpeed = 0.5f;
-    [SerializeField] float zoomOutSpeed = 0.5f;
-    [SerializeField] float zoomOutSensitivity = 2f;
-    [SerializeField] float zoomInSensitivity = 0.75f;
+    [SerializeField] float defaultFOV;
+    [SerializeField] float zoomFOV;
+    [SerializeField] float zoomInSpeed;
+    [SerializeField] float zoomOutSpeed;
+    [SerializeField] float zoomOutSensitivity;
+    [SerializeField] float zoomInSensitivity;
 
     [SerializeField] Canvas reticle;
     [SerializeField] Camera playerCamera;
@@ -19,16 +19,11 @@ public class WeaponZoom : MonoBehaviour
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject zoomed;
 
-    Vector3 originPos;
-    Quaternion originRot;
-    RigidbodyFirstPersonController fpsController;
+    [SerializeField] Vector3 originPos;
+    [SerializeField] Quaternion originRot;
+    
+    [SerializeField] RigidbodyFirstPersonController fpsController;
 
-    private void Start() 
-    {
-        this.originPos = this.weapon.transform.localPosition;
-        this.originRot = this.weapon.transform.rotation;
-        this.fpsController = GetComponent<RigidbodyFirstPersonController>();
-    }
 
     void Update() 
     {
@@ -40,6 +35,11 @@ public class WeaponZoom : MonoBehaviour
         {
             DoNotAimDownSights();
         }
+    }
+
+    public void WeaponSwitch()
+    {
+        
     }
 
     private void AimDownSights()

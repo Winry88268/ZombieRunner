@@ -4,16 +4,64 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    [SerializeField] private int ammoAmount = 15;
-    public int AmmoAmount { get { return ammoAmount; }  }
+    [SerializeField] AmmoSlot[] ammoSlots;
 
-    public void IncreaseAmmo(int increase)
+    [System.Serializable]
+    private class AmmoSlot
     {
-        this.ammoAmount += Mathf.Clamp(increase, 0, 10);
+        public AmmoType ammoType;
+        public int ammoLoadedAmount;
+        public int ammoTotalAmount;
+        public int maxAmmo;
+        public int maxMagazine;
     }
 
-    public void DecreaseAmmo()
+    public int GetAmmoLoadedAmount(AmmoType ammoType)
     {
-        this.ammoAmount -= Mathf.Clamp(1, 0, 10);
+        AmmoSlot ammoSlot = GetAmmoSlot(ammoType);
+        return ammoSlot.ammoLoadedAmount;
+    }
+
+    public int GetAmmoTotalAmount(AmmoType ammoType)
+    {
+        AmmoSlot ammoSlot = GetAmmoSlot(ammoType);
+        return ammoSlot.ammoTotalAmount;
+    }
+
+    public void IncreaseAmmo(int increase, AmmoType ammoType)
+    {
+        AmmoSlot ammoSlot = GetAmmoSlot(ammoType);
+        ammoSlot.ammoTotalAmount += Mathf.Clamp(increase, 0, ammoSlot.maxAmmo);
+    }
+
+    public void DecreaseAmmo(AmmoType ammoType)
+    {
+        AmmoSlot ammoSlot = GetAmmoSlot(ammoType);
+        ammoSlot.ammoLoadedAmount -= Mathf.Clamp(1, 0, ammoSlot.maxMagazine);
+    }
+
+    private AmmoSlot GetAmmoSlot(AmmoType ammoType)
+    {
+        foreach (AmmoSlot ammoSlot in this.ammoSlots)
+        {
+            if (ammoSlot.ammoType == ammoType)
+            {
+                return ammoSlot;
+            }
+        }
+        return null;
+    }
+
+    public void Reload(AmmoType ammoType)
+    {
+        AmmoSlot ammoSlot = GetAmmoSlot(ammoType);
+
+        if (ammoSlot.ammoLoadedAmount < ammoSlot.maxMagazine && ammoSlot.ammoTotalAmount > 0)
+        {
+            int ammoChange = Mathf.Clamp(ammoSlot.maxMagazine - ammoSlot.ammoLoadedAmount, 0, ammoSlot.ammoTotalAmount);
+
+            ammoSlot.ammoLoadedAmount += Mathf.Clamp(ammoChange, 0, ammoSlot.maxMagazine);
+            ammoSlot.ammoTotalAmount -= Mathf.Clamp(ammoChange, 0, ammoSlot.maxMagazine);
+        }
     }
 }

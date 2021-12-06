@@ -5,33 +5,44 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] float rayRange = 100f;
-    [SerializeField] float bulletDamage = 25f;
-    [SerializeField] float rateOfFire = 1f;
+    [SerializeField] float rayRange;
+    [SerializeField] float bulletDamage;
+    [SerializeField] float rateOfFire;
 
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
     [SerializeField] Camera FPCamera;
     [SerializeField] Ammo ammoSlot;
+    [SerializeField] AmmoType ammoType;
 
     bool canShoot = true;
 
+    void OnEnable() 
+    {
+        this.canShoot = true;
+    }
+
     void Update()
     {
-        if(Input.GetMouseButton(0) && this.canShoot == true)
+        if (Input.GetMouseButton(0) && this.canShoot == true)
         {
             StartCoroutine(Shoot());
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            this.ammoSlot.Reload(this.ammoType);
         }
     }
 
     IEnumerator Shoot()
     {
         this.canShoot = false;
-        if(this.ammoSlot.AmmoAmount > 0)
+        if (this.ammoSlot.GetAmmoLoadedAmount(this.ammoType) > 0)
         {
             PlayMuzzleFlash();
             ProcessRaycast();
-            yield return new WaitForSeconds(rateOfFire);
+            yield return new WaitForSeconds(this.rateOfFire);
         }
         this.canShoot = true;        
     }
@@ -44,7 +55,7 @@ public class Weapon : MonoBehaviour
     private void ProcessRaycast()
     {
         RaycastHit hit;
-        this.ammoSlot.DecreaseAmmo();
+        this.ammoSlot.DecreaseAmmo(this.ammoType);
 
         if (Physics.Raycast(this.FPCamera.transform.position,
                             this.FPCamera.transform.forward,
