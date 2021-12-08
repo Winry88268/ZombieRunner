@@ -37,11 +37,6 @@ public class WeaponZoom : MonoBehaviour
         }
     }
 
-    public void WeaponSwitch()
-    {
-        
-    }
-
     private void AimDownSights()
     {
         if(Mathf.Approximately(this.playerCamera.fieldOfView, this.zoomFOV)) { return; }

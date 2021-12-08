@@ -347,23 +347,24 @@ MonoBehaviour:
   - ammoType: 0
     ammoLoadedAmount: 7
     ammoTotalAmount: 7
-    maxAmmo: 35
+    maxAmmo: 14
     maxMagazine: 7
   - ammoType: 1
     ammoLoadedAmount: 8
     ammoTotalAmount: 8
-    maxAmmo: 40
+    maxAmmo: 16
     maxMagazine: 8
   - ammoType: 2
     ammoLoadedAmount: 30
     ammoTotalAmount: 30
-    maxAmmo: 150
+    maxAmmo: 60
     maxMagazine: 30
   - ammoType: 3
     ammoLoadedAmount: 5
     ammoTotalAmount: 5
     maxAmmo: 10
     maxMagazine: 5
+  reloadingWeaponCanvas: {fileID: 0}
 --- !u!1001 &3275437199043314444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -392,9 +393,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3776784991731490160}
     - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: rayRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 5200684595784008626}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: reloadTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: bulletDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: numOfBullets
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: effectiveRange
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition
+      value: 
+      objectReference: {fileID: 3668421144400495097}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.x
+      value: 0.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.y
+      value: -0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.z
+      value: 0.633
+      objectReference: {fileID: 0}
+    - target: {fileID: 828985737605980175, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: deviationAtEffectiveRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: FPCamera
       value: 
@@ -404,13 +445,61 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3776784991731490160}
     - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: rayRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 5200684595784008626}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: reloadTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: numOfBullets
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: effectiveRange
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition
+      value: 
+      objectReference: {fileID: 7554682466576031367}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.x
+      value: 0.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.y
+      value: -0.266
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.z
+      value: 0.288
+      objectReference: {fileID: 0}
+    - target: {fileID: 927539144637818977, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: deviationAtEffectiveRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501873457991096399, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340429049717280415, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3365058730835353947, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: m_Name
       value: Weapons
       objectReference: {fileID: 0}
+    - target: {fileID: 3365058730835353947, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3775744810350750798, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: reticle
       value: 
@@ -423,6 +512,14 @@ PrefabInstance:
       propertyPath: fpsController
       value: 
       objectReference: {fileID: 4007533265886555621}
+    - target: {fileID: 4088060089377851125, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505210597453029259, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4779161689976624006, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: reticle
       value: 
@@ -435,6 +532,22 @@ PrefabInstance:
       propertyPath: fpsController
       value: 
       objectReference: {fileID: 4007533265886555621}
+    - target: {fileID: 4859386626411829233, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093239061409755883, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222601909428211884, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686075758049576753, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: FPCamera
       value: 
@@ -444,9 +557,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3776784991731490160}
     - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: rayRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 5200684595784008626}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: reloadTime
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: numOfBullets
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: effectiveRange
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition
+      value: 
+      objectReference: {fileID: 6496831405990585320}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.x
+      value: 0.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.y
+      value: -0.275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.z
+      value: 0.406
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239738450827682379, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: deviationAtEffectiveRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405612355096373843, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: FPCamera
       value: 
@@ -456,9 +609,45 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3776784991731490160}
     - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: rayRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 5200684595784008626}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: reloadTime
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: numOfBullets
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: effectiveRange
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition
+      value: 
+      objectReference: {fileID: 6958538179160533853}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.x
+      value: 0.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.y
+      value: -0.297
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: originPosition.z
+      value: 0.301
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893605446128513158, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: deviationAtEffectiveRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7964529308748179495, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: reticle
       value: 
@@ -471,6 +660,18 @@ PrefabInstance:
       propertyPath: fpsController
       value: 
       objectReference: {fileID: 4007533265886555621}
+    - target: {fileID: 8381223309888952245, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568761840856040273, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941336129362737758, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8990441793371778700, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -520,6 +721,26 @@ PrefabInstance:
 --- !u!4 &5886424521729371520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8990441793371778700, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+  m_PrefabInstance: {fileID: 3275437199043314444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6496831405990585320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8601261188396376292, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+  m_PrefabInstance: {fileID: 3275437199043314444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3668421144400495097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2277811370224632565, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+  m_PrefabInstance: {fileID: 3275437199043314444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6958538179160533853 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5612894007010568273, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
+  m_PrefabInstance: {fileID: 3275437199043314444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7554682466576031367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5017906542237785483, guid: 7828e831f91848b4f9946405473e44ea, type: 3}
   m_PrefabInstance: {fileID: 3275437199043314444}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5738137592369473593

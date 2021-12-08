@@ -80,7 +80,6 @@ public class Weapon : MonoBehaviour
                 {
                     float modifiedDamage = ProcessRangeDamage(hit);
                     target.TakeDamage(modifiedDamage);
-                    Debug.Log(modifiedDamage);
                 }   
             }
         }
