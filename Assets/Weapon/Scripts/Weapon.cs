@@ -7,15 +7,22 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] float rayRange;
     [SerializeField] float bulletDamage;
+    [SerializeField] float numOfBullets;
+    [SerializeField] float effectiveRange;
+    [SerializeField] float deviationAtEffectiveRange = 1f;
     [SerializeField] float rateOfFire;
+    [SerializeField] float reloadTime;
+    public float ReloadTime { get { return this.reloadTime; } }
 
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
     [SerializeField] Camera FPCamera;
     [SerializeField] Ammo ammoSlot;
     [SerializeField] AmmoType ammoType;
+    public AmmoType AmmoType { get { return this.ammoType; } }
 
     bool canShoot = true;
+    public void CanShoot(bool b) { this.canShoot = b; }
 
     void OnEnable() 
     {
@@ -31,7 +38,7 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            this.ammoSlot.Reload(this.ammoType);
+            StartCoroutine(this.ammoSlot.Reload(this));
         }
     }
 
@@ -43,6 +50,7 @@ public class Weapon : MonoBehaviour
             PlayMuzzleFlash();
             ProcessRaycast();
             yield return new WaitForSeconds(this.rateOfFire);
+            if (this.ammoSlot.IsReloading) { yield break; }
         }
         this.canShoot = true;        
     }
@@ -57,24 +65,46 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         this.ammoSlot.DecreaseAmmo(this.ammoType);
 
-        if (Physics.Raycast(this.FPCamera.transform.position,
-                            this.FPCamera.transform.forward,
-                            out hit,
-                            this.rayRange))
+        for (int i = 0; i < this.numOfBullets; i++)
         {
-            CreateHitImpact(hit);
-            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
-            if (target == null)
-            {
-                return;
-            }
+            Vector3 deviation = ProcessShotVariance();
 
-            
-            target.TakeDamage(this.bulletDamage);
+            if (Physics.Raycast(this.FPCamera.transform.position,
+                                deviation,
+                                out hit,
+                                this.rayRange))
+            {
+                CreateHitImpact(hit);
+                EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+                if (target != null)
+                {
+                    float modifiedDamage = ProcessRangeDamage(hit);
+                    target.TakeDamage(modifiedDamage);
+                    Debug.Log(modifiedDamage);
+                }   
+            }
+        }
+    }
+
+    private Vector3 ProcessShotVariance()
+    {
+        Vector3 deviation3D = UnityEngine.Random.insideUnitCircle * this.deviationAtEffectiveRange;
+        Quaternion rot = Quaternion.LookRotation(Vector3.forward * this.effectiveRange + deviation3D);
+        Vector3 newForward = this.FPCamera.transform.rotation * rot * Vector3.forward;
+        return newForward;
+    }
+
+    private float ProcessRangeDamage(RaycastHit hit)
+    {
+        if (hit.distance <= this.effectiveRange)
+        {
+            return this.bulletDamage;
         }
         else
         {
-            return;
+            float effectiveOffset = this.effectiveRange / hit.distance;
+            float newDamage = (float)Math.Round(this.bulletDamage * effectiveOffset);
+            return newDamage;
         }
     }
 

@@ -5,6 +5,10 @@ using UnityEngine;
 public class Ammo : MonoBehaviour
 {
     [SerializeField] AmmoSlot[] ammoSlots;
+    [SerializeField] Canvas reloadingWeaponCanvas;
+
+    bool isReloading = false;
+    public bool IsReloading { get { return this.isReloading; } }
 
     [System.Serializable]
     private class AmmoSlot
@@ -52,16 +56,28 @@ public class Ammo : MonoBehaviour
         return null;
     }
 
-    public void Reload(AmmoType ammoType)
+    public IEnumerator Reload(Weapon weapon)
     {
-        AmmoSlot ammoSlot = GetAmmoSlot(ammoType);
+        if (this.isReloading) { yield break; }
+        
+        AmmoSlot ammoSlot = GetAmmoSlot(weapon.AmmoType);
 
         if (ammoSlot.ammoLoadedAmount < ammoSlot.maxMagazine && ammoSlot.ammoTotalAmount > 0)
         {
+            this.isReloading = true;
+            weapon.CanShoot(false);
+            this.reloadingWeaponCanvas.enabled = true;
+
+            yield return new WaitForSeconds(weapon.ReloadTime);
+
             int ammoChange = Mathf.Clamp(ammoSlot.maxMagazine - ammoSlot.ammoLoadedAmount, 0, ammoSlot.ammoTotalAmount);
 
             ammoSlot.ammoLoadedAmount += Mathf.Clamp(ammoChange, 0, ammoSlot.maxMagazine);
             ammoSlot.ammoTotalAmount -= Mathf.Clamp(ammoChange, 0, ammoSlot.maxMagazine);
+
+            this.reloadingWeaponCanvas.enabled = false;
+            this.isReloading = false;
+            weapon.CanShoot(true);
         }
     }
 }

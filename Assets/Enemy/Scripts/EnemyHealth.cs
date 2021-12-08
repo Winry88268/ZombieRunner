@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
         
         if(this.hitPoints <= 0)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
         else
         {
