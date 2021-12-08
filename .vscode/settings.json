@@ -55,6 +55,8 @@
     },
     "cSpell.words": [
         "Behaviour",
-        "Mathf"
+        "Lerp",
+        "Mathf",
+        "Slerp"
     ]
 }
